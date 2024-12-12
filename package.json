@@ -1,0 +1,21 @@
+{
+  "name": "hashmap",
+  "version": "1.0.0",
+  "description": "A simple hashmap implementation in JS in accordance with The Odin Project.",
+  "main": "test.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "hashmap"
+  },
+  "keywords": [
+    "hashmap",
+    "javascript",
+    "data-structures"
+  ],
+  "author": "quantum-corn",
+  "license": "ISC"
+}
