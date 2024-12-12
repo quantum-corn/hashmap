@@ -1,7 +1,7 @@
 import LinkedList from "./linked-list.js";
 
 const HashMap = function (capacity, loadFactor) {
-  let hashMap = [];
+  let hashMap = new Array(capacity);
 
   const hash = function (key) {
     const primeFactor = 31;
@@ -20,18 +20,24 @@ const HashMap = function (capacity, loadFactor) {
   const set = function (key, value) {
     let hashCode = hash(key);
     validateIndex(hashCode);
-    console.log('setting the provided data');
+    if (hashMap[hashCode] == null) {
+      hashMap[hashCode] = new LinkedList();
+    }
+    hashMap[hashCode].append(key, value);
   }
 
   const get = function (key) {
     let hashCode = hash(key);
     validateIndex(hashCode);
-    console.log('getting the requested data');
+    let content = hashMap[hashCode];
+    if (content == null) return null;
+    else return content.get(key);
   };
 
   return {
     set,
     get,
+    hashMap,
   };
 };
 

@@ -1,6 +1,6 @@
-const Node = function (value, nextNode = null) {
+const Node = function (key, value, nextNode = null) {
   return {
-    value: value,
+    [key]: value,
     nextNode: nextNode,
   };
 };
@@ -10,8 +10,8 @@ const LinkedList = function () {
   let tailNode = null;
   let length = 0;
 
-  const append = function (value) {
-    let newNode = Node(value);
+  const append = function (key, value) {
+    let newNode = Node(key, value);
     if (tailNode == null) {
       headNode = newNode;
       tailNode = newNode;
@@ -22,8 +22,37 @@ const LinkedList = function () {
     length++;
   };
 
+  const traverse = function (func) {
+    let currentNode = headNode;
+    let result = {
+      value: null,
+      done: false,
+    };
+    let index = 0;
+    while (currentNode != null) {
+      result = func(currentNode, index, result);
+      index++;
+      if (result.done == true) break;
+      currentNode = currentNode.nextNode;
+    }
+    return result.value;
+  };
+
+  const get = function (key) {
+    let value = null;
+    value = traverse((node, index, result) => {
+      if (node.hasOwnProperty(key)) {
+        result.value = node[key];
+        result.done = true;
+      }
+      return result;
+    });
+    return value;
+  };
+
   return {
     append,
+    get
   };
 };
 
